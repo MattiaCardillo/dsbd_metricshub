@@ -8,7 +8,25 @@ services:
     ports:
       - 5000:5000
     volumes:
-      - .:/app
+      - .:/etldatapipeline
+  datastorage:
+    build:
+      context: .
+      dockerfile: ./datastorage/Dockerfile
+    command: 'python ./datastorage/main.py'
+    ports:
+      - 5001:5000
+    volumes:
+      - .:/datastorage
+  dataretrieval:
+    build:
+      context: .
+      dockerfile: ./dataretrieval/Dockerfile
+    command: 'python ./dataretrieval/main.py'
+    ports:
+      - 5002:5000
+    volumes:
+      - .:/dataretrieval
 
   prometheus:
     image: prom/prometheus
