@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  micro1:
+  etldatapipeline:
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,7 +10,7 @@ services:
     volumes:
       - .:/app
 
-  rometheus:
+  prometheus:
     image: prom/prometheus
     ports:
       - 9090:9090
