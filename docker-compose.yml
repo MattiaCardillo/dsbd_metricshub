@@ -3,8 +3,8 @@ services:
   etldatapipeline:
     build:
       context: .
-      dockerfile: Dockerfile
-    command: 'python main.py'
+      dockerfile: ./etldatapipeline/Dockerfile
+    command: 'python ./etldatapipeline/main.py'
     ports:
       - 5000:5000
     volumes:
@@ -15,4 +15,4 @@ services:
     ports:
       - 9090:9090
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./etldatapipeline/prometheus.yml:/etc/prometheus/prometheus.yml
