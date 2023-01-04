@@ -3,13 +3,13 @@ from prometheus_api_client import PrometheusConnect, MetricsList, MetricSnapshot
 from datetime import timedelta
 from confluent_kafka import Producer, Consumer
 from prometheus_api_client.utils import parse_datetime
+from configs import prometheus
 
 kafka_config = {'bootstrap.servers': 'kafka:9092'}
 kafka_topic = 'prometheusdata'
 
 app = Flask(__name__)
-prom = PrometheusConnect(url="http://host.docker.internal:9090", disable_ssl=True)
-#prom = PrometheusConnect(url="http://15.160.61.227:29090", disable_ssl=True)
+prom = PrometheusConnect(url=prometheus.prometheushostname, disable_ssl=True)
 
 label_config = {'job': 'prometheus'}
 
