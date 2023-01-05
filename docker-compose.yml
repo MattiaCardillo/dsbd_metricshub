@@ -15,7 +15,7 @@ services:
       dockerfile: ./datastorage/Dockerfile
     command: 'python ./datastorage/main.py'
     ports:
-      - 5001:5000
+      - 5001:5001
     volumes:
       - .:/datastorage
   dataretrieval:
@@ -24,7 +24,7 @@ services:
       dockerfile: ./dataretrieval/Dockerfile
     command: 'python ./dataretrieval/main.py'
     ports:
-      - 5002:5000
+      - 5002:5002
     volumes:
       - .:/dataretrieval
 
