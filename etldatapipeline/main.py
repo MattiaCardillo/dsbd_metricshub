@@ -36,34 +36,5 @@ def sendKafkaMetrics():
 
     return 'Sended'
 
-@app.route('/metrics/get')
-def getKafkaMetrics():
-    print('Consumer Start')
-    c = Consumer({
-    'bootstrap.servers': 'localhost:29092',
-    'group.id': 'prometheusgroup',
-    'auto.offset.reset': 'earliest'
-    })
-    c.subscribe(['prometheusdata'])
-
-    messageReceived = False;
-
-    while (messageReceived == False):
-        msg = c.poll(1.0)
-        
-        if msg is None:
-            continue
-        if msg.error():
-            print("Errore: {}".format(msg.error()))
-            continue
-
-        # Stampa il messaggio
-        print("Messaggio ricevuto: {}".format(msg.value().decode('utf-8')))
-        messageReceived = True
-    c.close()
-
-    return 'Received'
-
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
