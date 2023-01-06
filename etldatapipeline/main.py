@@ -1,40 +1,37 @@
-from flask import Flask
-from prometheus_api_client import PrometheusConnect, MetricsList, MetricSnapshotDataFrame, MetricRangeDataFrame
-from datetime import timedelta
-from confluent_kafka import Producer, Consumer
-from prometheus_api_client.utils import parse_datetime
-from configs import prometheus as prom_config
-from configs import kafka as kafka_config
+from flask import Flask, request, Response, make_response
+import threading
+from scripts import startHelpers
+from scripts import logsHelpers
+import datetime
+
+# get the current date
+now = datetime.datetime.now()
+now_str = now.strftime('%d_%m_%Y')
 
 app = Flask(__name__)
-prom = PrometheusConnect(url = prom_config.prometheushostname, disable_ssl=True)
-
-def delivery_callback(err, msg):
-        if err:
-            print(err)
-        else:
-            print('kafka msg sended')
 
 @app.route('/')
 def hello():
     return 'Hello from Etl data pipeline'
 
-@app.route('/metrics')
-def getMetrics():
-    allJobMetrics = prom.get_current_metric_value(metric_name= '', label_config = prom_config.label_config)
-    return allJobMetrics
-
-@app.route('/metrics/send')
+@app.route('/start')
 def sendKafkaMetrics():
-    # Create Producer instance
-    p = Producer(**kafka_config.server_config)
-
-    # Produce line (without newline)
-    p.produce(kafka_config.kafka_topic, 'Prova msg', callback=delivery_callback)
-    p.poll(0)
-    p.flush()
-
-    return 'Sended'
+    t = threading.Thread(target=startHelpers.startProcess)
+    t.start()
+    return 'Script started'
+    
+@app.route('/logs')
+def getLogs():
+    date = request.args.get('date')
+    if date is None:
+        date = now_str
+    try:
+        logs = logsHelpers.getLogFileByDate(date)
+    except Exception as e:
+        response = make_response('No valid date')
+        response.status_code = 404
+        return response
+    return Response(logs, mimetype='text/plain')
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
