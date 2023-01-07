@@ -1,4 +1,5 @@
 from reportlab.pdfgen import canvas
+import os
 
 def writeReport(fileName, args):
 
@@ -13,6 +14,10 @@ def writeReport(fileName, args):
             yPosition = yPosition - imgHeight
             c.drawImage(arg, xPosition, yPosition, width=300, height=imgHeight)
             yPosition = yPosition - 15
+            try:
+                os.remove(arg)
+            except FileNotFoundError:
+                print("Il file non esiste")
         else:
             c.drawString(xPosition, yPosition, arg)
             yPosition = yPosition - 15

@@ -47,9 +47,11 @@ def seasonabilityTest(ts):
 
     # Aggiungi un titolo al grafico
     plt.title('Stagionalità della serie temporale')
-    plt.savefig('season.png')
 
-    return 'season.png'
+    filename='tmp/seasonability.png'
+    plt.savefig(filename)
+
+    return filename
 
 def autocorrelationTest(ts):
     autocorr = acf(ts, nlags=4)
@@ -65,8 +67,8 @@ def autocorrelationTest(ts):
 
     # Aggiungi un titolo al grafico
     plt.title('Autocorrelazione della serie temporale')
-
+    filename='tmp/atf.png'
     # Mostra il grafico
-    plt.show()
+    plt.savefig(filename)
 
-    return
+    return filename

@@ -136,3 +136,5 @@ dmypy.json
 !*example.pdf
 
 *.png
+
+/tmp
