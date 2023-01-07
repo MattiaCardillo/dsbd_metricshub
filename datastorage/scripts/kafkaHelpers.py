@@ -7,26 +7,18 @@ def startConsumeKafka():
     c = Consumer(kafka_configs.consumer_config)
     c.subscribe([kafka_configs.topic_name])
 
-    messageToRead = 1;
-    messageReceived = 0;
-
-    result = "Null"
-
     try:
-        while (messageReceived<messageToRead):
-            messageReceived +=1
+        while (True):
             msg = c.poll(1.0)
-            
             if msg is None:
                 continue
             if msg.error():
-                result = "Errore: {}".format(msg.error())
+                print("Consumer error: {}".format(msg.error()))
                 continue
 
-            # Stampa il messaggio
-            result = "Messaggio ricevuto: {}".format(msg.value().decode('utf-8'))
+            print('Received message: {}'.format(msg.value().decode('utf-8')))
         c.close()
-    except(e): 
+    except Exception as e: 
         print(e)
 
-    return result
+    return

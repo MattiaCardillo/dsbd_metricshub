@@ -1,7 +1,7 @@
 # compose_flask/app.py
 from flask import Flask
-from confluent_kafka import Consumer
-from scripts import kafkaHelpers
+import threading
+from scripts import startHelpers
 
 app = Flask(__name__)
 
@@ -11,8 +11,9 @@ def hello():
 
 @app.route('/start')
 def kafkaStart():
-    res = kafkaHelpers.startConsumeKafka()
-    return res
+    t = threading.Thread(target=startHelpers.startProcess)
+    t.start()
+    return 'Script started'
 
 if __name__ == "__main__":
     app.run(port=5001)
