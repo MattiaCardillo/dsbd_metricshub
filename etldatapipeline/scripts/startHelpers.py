@@ -31,9 +31,9 @@ def firstStep():
         ts = tsManipulationHelpers.parseIntoSeries(result[0]['values'])
         stationarityResult = tsManipulationHelpers.stationarityTest(ts)
         seasonabilityResult = tsManipulationHelpers.seasonabilityTest(ts)
-        #autocorrelationResult = tsManipulationHelpers.autocorrelationTest(ts)
+        autocorrelationResult = tsManipulationHelpers.autocorrelationTest(ts)
 
-        reportsHelpers.writeReport(metricName, ['Test di stazionarietà:', stationarityResult, 'Test di stagionalità:', seasonabilityResult, 'Test di autocorrelazione:' ,seasonabilityResult])
+        reportsHelpers.writeReport(metricName, ['Test di stazionarietà:', stationarityResult, 'Test di stagionalità:', seasonabilityResult, 'Test di autocorrelazione:' ,autocorrelationResult])
 
     print('End of the first step \n')
     return
