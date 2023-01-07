@@ -41,3 +41,35 @@ def getAllMetricsRangeByHour(hour, prom, prom_config, metricList):
     logsHelpers.getLogger().info('{0}h scripts took {1} seconds to end'.format(hour, duration))
 
     return newMetricsArray
+
+def getCustomMetricsRangeByHour(hour, prom, prom_config, metricName):
+    start_time_second = time.time()
+    query='{__name__=~"'+metricName+'",job="'+prom_config.label_config['job']+'"}['+str(hour)+'h]'
+    metricList = prom.custom_query(query)
+
+    newMetricsArray = []
+    newMetricsFormat = {'metric': None, 'max': None, 'min': None, 'avg': None}
+    for metricData in metricList:
+        print('Running for {}'.format(metricData['metric']['__name__']))
+        
+        metric_df = MetricRangeDataFrame(metricData)
+        max= metric_df['value'].max()
+        min= metric_df['value'].min()
+        avg= metric_df['value'].mean()
+        newMetricsFormat['metric'] = metricData['metric']['__name__']
+        newMetricsFormat['max'] = max
+        newMetricsFormat['min'] = min
+        newMetricsFormat['avg'] = avg
+        newMetricsArray.append(newMetricsFormat)
+
+    end_time = time.time()
+    duration = end_time - start_time_second
+    logsHelpers.getLogger().info('{0}h scripts took {1} seconds to end'.format(hour, duration))
+
+    return newMetricsArray
+
+def getCustomMetricListRangeByHour(hour, prom, prom_config, metricName):
+    query='{__name__=~"'+metricName+'",job="'+prom_config.label_config['job']+'"}['+str(hour)+'h]'
+    metricList = prom.custom_query(query)
+
+    return metricList
