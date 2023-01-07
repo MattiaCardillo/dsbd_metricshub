@@ -14,20 +14,28 @@ services:
       context: .
       dockerfile: ./datastorage/Dockerfile
     command: 'python ./datastorage/main.py'
+    environment:
+      - DATABASE_URL=postgresql://myuser:mypassword@db:5432/mydatabase
     ports:
       - 5001:5001
     volumes:
       - .:/datastorage
+    depends_on:
+      - db
+    entrypoint: ["python", "./datastorage/scripts/create_tables.py"]
   dataretrieval:
     build:
       context: .
       dockerfile: ./dataretrieval/Dockerfile
     command: 'python ./dataretrieval/main.py'
+    environment:
+      - DATABASE_URL=postgresql://myuser:mypassword@db:5432/mydatabase
     ports:
       - 5002:5002
     volumes:
       - .:/dataretrieval
-
+    depends_on:
+          - db
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:
@@ -47,3 +55,16 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=mydatabase
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - mydatabase:/var/lib/postgresql/data
+volumes:
+  mydatabase:
