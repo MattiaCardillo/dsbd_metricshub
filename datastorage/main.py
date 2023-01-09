@@ -1,9 +1,14 @@
 # compose_flask/app.py
 from flask import Flask
 import threading
-# from scripts import startHelpers
+import sys
+sys.path.append("scripts/")
+sys.path.append("config/")
+from scripts import startHelpers
+from create_tables import startDb
 
 app = Flask(__name__)
+startDb()
 
 @app.route('/')
 def hello():
@@ -11,9 +16,9 @@ def hello():
 
 @app.route('/start')
 def kafkaStart():
-    # t = threading.Thread(target=startHelpers.startProcess)
-    # t.start()
+    t = threading.Thread(target=startHelpers.startProcess)
+    t.start()
     return 'Script started'
 
 if __name__ == "__main__":
-    app.run(port=5001)
+    app.run(host="0.0.0.0", port=5001)

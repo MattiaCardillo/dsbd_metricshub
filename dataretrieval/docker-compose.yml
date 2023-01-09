@@ -3,8 +3,8 @@ services:
   dataretrieval:
     build:
       context: .
-      dockerfile: ./dataretrieval/Dockerfile
-    command: 'python ./dataretrieval/main.py'
+      dockerfile: Dockerfile
+    command: 'python main.py'
     environment:
       - isDocker=true
     ports:

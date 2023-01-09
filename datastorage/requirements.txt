@@ -1,2 +1,4 @@
 flask
+confluent_kafka
+datetime
 mysql-connector-python

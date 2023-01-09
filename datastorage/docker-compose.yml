@@ -11,4 +11,3 @@ services:
       - .:/datastorage
     environment:
       - isDocker=true
-    entrypoint: ["python", "./scripts/create_tables.py"]
