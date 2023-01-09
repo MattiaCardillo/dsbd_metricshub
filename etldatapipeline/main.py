@@ -2,7 +2,10 @@ from flask import Flask, request, Response, make_response
 import threading
 import sys
 sys.path.append("scripts/")
-sys.path.append("config/")
+sys.path.append("configs/")
+sys.path.append("logs/")
+sys.path.append("reports/")
+
 from scripts import startHelpers
 from scripts import logsHelpers
 import datetime

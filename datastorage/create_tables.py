@@ -34,19 +34,17 @@ def startDb():
 
   query = """
   CREATE TABLE IF NOT EXISTS metrics (
-      id INT,
-      nome VARCHAR(255)
+      id INT NOT NULL AUTO_INCREMENT,
+      metric VARCHAR(255),
+      max DOUBLE,
+      min DOUBLE,
+      avg DOUBLE,
+      PRIMARY KEY (id)
   )
   """
 
   mycursor.execute(query)
   mydb.commit()
 
-  # sqldirect = "INSERT INTO metrics (metric, max, min, avg) VALUES ('test', 3.23, 1.34, 2.34)"
-  # sqldirect = """INSERT INTO metrics (id, nome) VALUES (1, 'pippo');"""
-  # mycursor.execute(sqldirect)
-  # mydb.commit()
-  # print(mycursor.rowcount, "was inserted.")
-  # mycursor.execute("SELECT * FROM metrics;")
   mydb.close()
   return;
