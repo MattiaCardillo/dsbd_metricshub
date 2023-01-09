@@ -7,7 +7,12 @@ services:
     command: 'python main.py'
     environment:
       - isDocker=true
+    networks:
+      - dsbd_microservices_default
     ports:
       - 5000:5000
     volumes:
       - .:/etldatapipeline
+networks:
+  dsbd_microservices_default:
+    external: true

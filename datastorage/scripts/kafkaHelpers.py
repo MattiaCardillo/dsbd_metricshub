@@ -1,5 +1,5 @@
 from confluent_kafka import Consumer
-from config import kafka as kafka_configs
+from configs import kafka as kafka_configs
 
 def startConsumeKafka():
     #NB works only without docker

@@ -3,7 +3,7 @@ from flask import Flask
 import threading
 import sys
 sys.path.append("scripts/")
-sys.path.append("config/")
+sys.path.append("configs/")
 from scripts import startHelpers
 from create_tables import startDb
 
