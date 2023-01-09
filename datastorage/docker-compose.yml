@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  datastorage:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'python main.py'
+    ports:
+      - 5001:5001
+    volumes:
+      - .:/datastorage
+    environment:
+      - isDocker=true
+    entrypoint: ["python", "./scripts/create_tables.py"]

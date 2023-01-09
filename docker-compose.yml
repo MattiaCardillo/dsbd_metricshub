@@ -1,41 +1,5 @@
 version: '3.8'
 services:
-  etldatapipeline:
-    build:
-      context: .
-      dockerfile: ./etldatapipeline/Dockerfile
-    command: 'python ./etldatapipeline/main.py'
-    ports:
-      - 5000:5000
-    volumes:
-      - .:/etldatapipeline
-  datastorage:
-    build:
-      context: .
-      dockerfile: ./datastorage/Dockerfile
-    command: 'python ./datastorage/main.py'
-    environment:
-      - DATABASE_URL=postgresql://myuser:mypassword@db:5432/mydatabase
-    ports:
-      - 5001:5001
-    volumes:
-      - .:/datastorage
-    depends_on:
-      - db
-    entrypoint: ["python", "./datastorage/scripts/create_tables.py"]
-  dataretrieval:
-    build:
-      context: .
-      dockerfile: ./dataretrieval/Dockerfile
-    command: 'python ./dataretrieval/main.py'
-    environment:
-      - DATABASE_URL=postgresql://myuser:mypassword@db:5432/mydatabase
-    ports:
-      - 5002:5002
-    volumes:
-      - .:/dataretrieval
-    depends_on:
-          - postgres
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:
@@ -55,21 +19,15 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-
-  postgres:
-    image: postgres
-    environment:
-      POSTGRES_PASSWORD: mypassword
-    volumes:
-      - ./postgres:/var/lib/postgresql/data
-  pgadmin:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: pgadmin@example.com
-      PGADMIN_DEFAULT_PASSWORD: mypassword
+  db:
+    image: mysql
+    restart: always
     ports:
-      - 80:80
-    depends_on:
-      - postgres
-volumes:
-  mydatabase:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: hegr.TEeH.243
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

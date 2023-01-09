@@ -1,16 +1,50 @@
-import psycopg2
+import mysql.connector
+import os
+
+host = 'host.docker.internal' if os.environ.get('isDocker') else 'localhost'
 
 # Crea la connessione al database
-conn = psycopg2.connect(host='localhost', port=5432, user='postgres', password='mypassword', dbname='postgres')
+mydb = mysql.connector.connect(
+  host=host,
+  user="root",
+  password="hegr.TEeH.243"
+)
 
-# Crea un cursore
-cur = conn.cursor()
+# Crea il cursore
+mycursor = mydb.cursor()
 
-# Crea la tabella "users"
-cur.execute("CREATE TABLE metrics (id SERIAL PRIMARY KEY, metric VARCHAR(255), max DOUBLE PRECISION, min DOUBLE PRECISION, avg DOUBLE PRECISION)")
+query = """
+CREATE DATABASE IF NOT EXISTS metricsDb
+"""
+mycursor.execute(query)
+mydb.commit()
+mydb.close()
 
-# Committa le modifiche
-conn.commit()
+mydb = mysql.connector.connect(
+  host="host.docker.internal",
+  user="root",
+  password="hegr.TEeH.243",
+  database="metricsDb"
+)
+mycursor = mydb.cursor()
 
-# Chiude la connessione
-conn.close()
+mycursor.execute(query)
+mydb.commit()
+
+query = """
+CREATE TABLE IF NOT EXISTS metrics (
+    id INT,
+    nome VARCHAR(255)
+)
+"""
+
+mycursor.execute(query)
+mydb.commit()
+
+# sqldirect = "INSERT INTO metrics (metric, max, min, avg) VALUES ('test', 3.23, 1.34, 2.34)"
+sqldirect = """INSERT INTO metrics (id, nome) VALUES (1, 'pippo');"""
+mycursor.execute(sqldirect)
+mydb.commit()
+print(mycursor.rowcount, "was inserted.")
+mycursor.execute("SELECT * FROM metrics;")
+mydb.close()

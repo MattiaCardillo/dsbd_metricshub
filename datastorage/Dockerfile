@@ -5,4 +5,4 @@ WORKDIR /datastorage
 
 EXPOSE 5001
 
-RUN pip install -r ./datastorage/requirements.txt
+RUN pip install -r ./requirements.txt
