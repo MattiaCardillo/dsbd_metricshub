@@ -3,3 +3,5 @@ kafka-python
 confluent_kafka
 datetime
 prometheus_api_client
+statsmodels
+reportlab
