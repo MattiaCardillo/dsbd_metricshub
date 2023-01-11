@@ -33,7 +33,7 @@ def startDb():
   mydb.commit()
 
   query = """
-  CREATE TABLE IF NOT EXISTS metrics (
+  CREATE TABLE IF NOT EXISTS metrics1h (
       id INT NOT NULL AUTO_INCREMENT,
       metric VARCHAR(255),
       max DOUBLE,
@@ -43,7 +43,31 @@ def startDb():
   )
   """
 
+  query2 = """
+  CREATE TABLE IF NOT EXISTS metrics3h (
+      id INT NOT NULL AUTO_INCREMENT,
+      metric VARCHAR(255),
+      max DOUBLE,
+      min DOUBLE,
+      avg DOUBLE,
+      PRIMARY KEY (id)
+  )
+  """
+
+  query3 = """
+  CREATE TABLE IF NOT EXISTS metrics12h (
+      id INT NOT NULL AUTO_INCREMENT,
+      metric VARCHAR(255),
+      max DOUBLE,
+      min DOUBLE,
+      avg DOUBLE,
+      PRIMARY KEY (id)
+  )
+  """
   mycursor.execute(query)
+  mycursor.execute(query2)
+  mycursor.execute(query3)
+
   mydb.commit()
 
   mydb.close()

@@ -34,22 +34,25 @@ def stationarityTest(ts):
 
 def seasonabilityTest(ts):
 
-    # Esegue la decomposizione stagionale della serie
-    result = seasonal_decompose(ts, period=12)
+    try:
+        # Esegue la decomposizione stagionale della serie
+        result = seasonal_decompose(ts, period=12)
 
-    # Stampa i componenti della decomposizione
-    print("Trend:", result.trend)
-    print("Stagionale:", result.seasonal)
-    print("Residui:", result.resid)
+        # Stampa i componenti della decomposizione
+        print("Trend:", result.trend)
+        print("Stagionale:", result.seasonal)
+        print("Residui:", result.resid)
 
-    # Crea il grafico
-    plt.plot(result.seasonal)
+        # Crea il grafico
+        plt.plot(result.seasonal)
 
-    # Aggiungi un titolo al grafico
-    plt.title('Stagionalità della serie temporale')
+        # Aggiungi un titolo al grafico
+        plt.title('Stagionalità della serie temporale')
 
-    filename='tmp/seasonability.png'
-    plt.savefig(filename)
+        filename='tmp/seasonability.png'
+        plt.savefig(filename)
+    except Exception as e:
+        print(e)
 
     return filename
 
