@@ -17,7 +17,7 @@ Si crei un sistema di monitoraggio interno che renda visibile (tramite REST, log
 exporter) il tempo necessario all’esecuzione delle varie funzionalità (quanto tempo serve a
 generare i dati delle 12 ore per una metrica?)
 
-Data Storage -> si crei un microservizio che avvii un consumer group del topicahah
+Data Storage -> si crei un microservizio che avvii un consumer group del topic
 “promethuesdata” e, per ogni messaggio prelevato, memorizzi i valori calcolati in un DB a
 scelta.
 
