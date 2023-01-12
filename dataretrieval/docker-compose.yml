@@ -7,6 +7,9 @@ services:
     command: 'python main.py'
     environment:
       - isDocker=true
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=root
+      - MYSQL_DB=metricsDb
     ports:
       - 5002:5002
     volumes:

@@ -17,13 +17,12 @@ Si crei un sistema di monitoraggio interno che renda visibile (tramite REST, log
 exporter) il tempo necessario all’esecuzione delle varie funzionalità (quanto tempo serve a
 generare i dati delle 12 ore per una metrica?)
 
-Data Storage -> si crei un microservizio che avvii un consumer group del topic
+Data Storage -> si crei un microservizio che avvii un consumer group del topicahah
 “promethuesdata” e, per ogni messaggio prelevato, memorizzi i valori calcolati in un DB a
 scelta.
 
 Data Retrieval -> si crei un microservizio che offre una interfaccia REST-o gRPC-based- che
-permetta di estrarre in modo strutturato le informazioni generate dall’applicazione ETL e
-contenute nel DB.
+permetta di estrarre in modo strutturato le informazioni generate dall’applicazione ETL e contenute nel DB.
 Si rendano disponibili:
 - QUERY di tutte le metriche disponibili in Prometheus
 - Per ogni metrica

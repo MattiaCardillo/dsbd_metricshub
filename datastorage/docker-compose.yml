@@ -13,6 +13,9 @@ services:
       - .:/datastorage
     environment:
       - isDocker=true
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=root
+      - MYSQL_DB=metricsDb
 networks:
   dsbd_microservices_default:
     external: true
