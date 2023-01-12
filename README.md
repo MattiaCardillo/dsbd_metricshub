@@ -22,8 +22,7 @@ Data Storage -> si crei un microservizio che avvii un consumer group del topic
 scelta.
 
 Data Retrieval -> si crei un microservizio che offre una interfaccia REST-o gRPC-based- che
-permetta di estrarre in modo strutturato le informazioni generate dall’applicazione ETL e
-contenute nel DB.
+permetta di estrarre in modo strutturato le informazioni generate dall’applicazione ETL e contenute nel DB.
 Si rendano disponibili:
 - QUERY di tutte le metriche disponibili in Prometheus
 - Per ogni metrica

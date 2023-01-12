@@ -1,19 +1,19 @@
 import mysql.connector
+import os
 
 queries = {
     "insertMetric1h": "INSERT INTO metrics1h (metric, max, min, avg) VALUES (%s, %s, %s, %s)",
     "insertMetric3h": "INSERT INTO metrics3h (metric, max, min, avg) VALUES (%s, %s, %s, %s)",
     "insertMetric12h": "INSERT INTO metrics12h (metric, max, min, avg) VALUES (%s, %s, %s, %s)",
-
     "getMetrics": "SELECT * from metrics"
 }
 
 def connectToDb():
     mydb = mysql.connector.connect(
         host="host.docker.internal",
-        user="root",
-        password="hegr.TEeH.243",
-        database="metricsDb"
+        user= os.environ.get('MYSQL_USER'),
+        password= os.environ.get('MYSQL_ROOT_PASSWORD'),
+        database= os.environ.get('MYSQL_DB')
     )
     return mydb
 
