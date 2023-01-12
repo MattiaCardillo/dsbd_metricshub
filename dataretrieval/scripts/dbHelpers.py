@@ -16,7 +16,10 @@ queries = {
         ON metrics1h.metric = metrics12h.metric;
     """,
     "getMetricsByName": "SELECT * from allmetricviewfinal WHERE name = %s",
-    "listAllNames": "SELECT name from allmetricviewfinal"
+    "listAllNames": "SELECT name from allmetricviewfinal",
+    "getMetricsFromTable1h": "SELECT * from metrics1h",
+    "getMetricsFromTable3h": "SELECT * from metrics3h",
+    "getMetricsFromTable12h": "SELECT * from metrics12h"
 }
 
 def connectToDb():
