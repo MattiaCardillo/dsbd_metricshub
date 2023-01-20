@@ -8,12 +8,13 @@ queries = {
         SELECT metrics1h.metric as name, 
         metrics1h.max as max1h, metrics3h.max as max3h, metrics12h.max as max12h,
         metrics1h.min as min1h, metrics3h.min as min3h, metrics12h.min as min12h,
-        metrics1h.avg as avg1h, metrics3h.avg as avg3h, metrics12h.avg as avg12h
+        metrics1h.avg as avg1h, metrics3h.avg as avg3h, metrics12h.avg as avg12h,
+        metrics1h.std_dev as std_dev1h, metrics3h.std_dev as std_dev3h, metrics12h.std_dev as std_dev12h
         FROM metrics1h
         JOIN metrics3h
-        ON metrics1h.metric = metrics3h.metric
+        ON metrics1h.id = metrics3h.id
         JOIN metrics12h
-        ON metrics1h.metric = metrics12h.metric;
+        ON metrics1h.id = metrics12h.id;
     """,
     "getMetricsByName": "SELECT * from allmetricviewfinal WHERE name = %s",
     "listAllNames": "SELECT name from allmetricviewfinal",

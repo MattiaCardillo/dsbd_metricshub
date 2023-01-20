@@ -39,6 +39,7 @@ def startDb():
       max DOUBLE,
       min DOUBLE,
       avg DOUBLE,
+      std_dev DOUBLE,
       PRIMARY KEY (id)
   )
   """
@@ -50,6 +51,7 @@ def startDb():
       max DOUBLE,
       min DOUBLE,
       avg DOUBLE,
+      std_dev DOUBLE,
       PRIMARY KEY (id)
   )
   """
@@ -61,6 +63,7 @@ def startDb():
       max DOUBLE,
       min DOUBLE,
       avg DOUBLE,
+      std_dev DOUBLE,
       PRIMARY KEY (id)
   )
   """
