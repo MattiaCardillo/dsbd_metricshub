@@ -16,6 +16,8 @@ now_str = now.strftime('%d_%m_%Y')
 
 app = Flask(__name__)
 
+startHelpers.startProcess()
+
 @app.route('/')
 def hello():
     return 'Hello from Etl data pipeline'

@@ -15,11 +15,11 @@ def startProcess():
     #Step 1 = calcoli un set di metadati con i relativi valori (autocorrelazione? stazionarietà? stagionalità?)
     result = firstStep()
 
-    #Step 2 = calcoli il valore di max, min, avg, dev_std della metriche per 1h,3h, 12h;
-    calculatedValues = secondStep()
+    # #Step 2 = calcoli il valore di max, min, avg, dev_std della metriche per 1h,3h, 12h;
+    # calculatedValues = secondStep()
 
-    #Step 3 = calcoli il valore di max, min, avg, dev_std della metriche per 1h,3h, 12h;
-    result = kafkaHelpers.sendKafkaMessage(json.dumps(calculatedValues))
+    # #Step 3 = calcoli il valore di max, min, avg, dev_std della metriche per 1h,3h, 12h;
+    # result = kafkaHelpers.sendKafkaMessage(json.dumps(calculatedValues))
     print('End start process')
 
 def firstStep():
@@ -28,12 +28,12 @@ def firstStep():
     for metricName in prom_config.selectedMetrics:
         print('Start test on {}'.format(metricName))
         result = prometheusHelpers.getCustomMetricListRangeByHour(prom=prom, prom_config=prom_config, hour=24, metricName=metricName)
-        ts = tsManipulationHelpers.parseIntoSeries(result[0]['values'])
-        stationarityResult = tsManipulationHelpers.stationarityTest(ts)
-        seasonabilityResult = tsManipulationHelpers.seasonabilityTest(ts)
-        autocorrelationResult = tsManipulationHelpers.autocorrelationTest(ts)
+        ts = tsManipulationHelpers.parseIntoSeries(result[0]['values'], metricName)
+        # stationarityResult = tsManipulationHelpers.stationarityTest(ts)
+        # seasonabilityResult = tsManipulationHelpers.seasonabilityTest(ts)
+        # autocorrelationResult = tsManipulationHelpers.autocorrelationTest(ts)
 
-        reportsHelpers.writeReport(metricName, ['Test di stazionarietà:', stationarityResult, 'Test di stagionalità:', seasonabilityResult, 'Test di autocorrelazione:' ,autocorrelationResult])
+        # reportsHelpers.writeReport(metricName, ['Test di stazionarietà:', stationarityResult, 'Test di stagionalità:', seasonabilityResult, 'Test di autocorrelazione:' ,autocorrelationResult])
 
     print('End of the first step \n')
     return

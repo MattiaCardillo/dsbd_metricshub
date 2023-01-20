@@ -3,16 +3,33 @@ from statsmodels.tsa.stattools import adfuller, acf
 from statsmodels.tsa.seasonal import seasonal_decompose
 import matplotlib.pyplot as plt
 
-def parseIntoSeries(list):
+def parseIntoSeries(list, metricName):
     df = pd.DataFrame.from_records(list, columns=["timestamp", "value"])
+    df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
 
     # Imposta l'indice del dataframe come il campo temporale
     df.set_index("timestamp", inplace=True)
 
+    # Adesso ho un dataframe con una colonna (i valori) e come indici ho tutti i timestamp
+    
     # Estrae la colonna "value" come una serie temporale
-    series = df["value"].squeeze()
+    # series = df["value"].squeeze()
 
-    return series
+    print(df.index)
+
+    #In questo momento la frequenza di campionamento è null, posso farmi un resampling forzando la frequenza ad 1 secondo.
+
+    tsr = df.resample(rule='T').mean()
+    print(tsr.index)
+
+    plt.title(metricName)
+    plt.xlabel('Time', fontsize=14)
+    plt.ylabel('Values', fontsize=14)
+    plt.plot(tsr, '-', label=metricName)
+
+    filename='tmp/'+metricName
+    plt.savefig(filename)
+    return df
 
 def stationarityTest(ts):
     testResult = "No test"
