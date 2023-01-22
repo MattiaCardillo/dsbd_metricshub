@@ -25,15 +25,16 @@ def startProcess():
 def firstStep():
     print('Start first step \n')
 
-    for metricName in prom_config.selectedMetrics:
-        print('Start test on {}'.format(metricName))
-        result = prometheusHelpers.getCustomMetricListRangeByHour(prom=prom, prom_config=prom_config, hour=24, metricName=metricName)
-        ts = tsManipulationHelpers.parseIntoSeries(result[0]['values'], metricName)
-        # stationarityResult = tsManipulationHelpers.stationarityTest(ts)
-        # seasonabilityResult = tsManipulationHelpers.seasonabilityTest(ts)
-        # autocorrelationResult = tsManipulationHelpers.autocorrelationTest(ts)
+    for selectedMetric in prom_config.selectedMetrics:
+        print('Start test on {}'.format(selectedMetric['name']))
+        result = prometheusHelpers.getCustomMetricListFromQuery(prom=prom, hour=24, query=selectedMetric['query'])
+        ts = tsManipulationHelpers.parseIntoSeries(result[0]['values'], selectedMetric['name'])
+        
+        stationarityResult = tsManipulationHelpers.stationarityTest(ts)
+        seasonabilityResult = tsManipulationHelpers.seasonabilityTest(ts)
+        autocorrelationResult = tsManipulationHelpers.autocorrelationTest(ts)
 
-        # reportsHelpers.writeReport(metricName, ['Test di stazionarietà:', stationarityResult, 'Test di stagionalità:', seasonabilityResult, 'Test di autocorrelazione:' ,autocorrelationResult])
+        reportsHelpers.writeReport(selectedMetric['name'], ['Test di stazionarietà:', stationarityResult, 'Test di stagionalità:', seasonabilityResult, 'Test di autocorrelazione:' ,autocorrelationResult])
 
     print('End of the first step \n')
     return
