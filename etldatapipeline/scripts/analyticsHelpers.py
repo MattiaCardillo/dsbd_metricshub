@@ -16,11 +16,12 @@ def startProcess():
     result = analyzeMetrics()
 
     # #Step 2 = calcoli il valore di max, min, avg, dev_std della metriche per 1h,3h, 12h;
-    # calculatedValues = retrieveData()
+    calculatedValues = retrieveData()
 
-    # #Step 3 = calcoli il valore di max, min, avg, dev_std della metriche per 1h,3h, 12h;
-    # result = kafkaHelpers.sendKafkaMessage(json.dumps(calculatedValues))
+    #Step 3 = calcoli il valore di max, min, avg, dev_std della metriche per 1h,3h, 12h;
+    result = kafkaHelpers.sendKafkaMessage(json.dumps(calculatedValues))
     print('End start process')
+    return result
 
 def analyzeMetrics():
     print('Start Analyzing Metrics\n')

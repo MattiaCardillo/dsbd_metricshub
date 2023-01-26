@@ -1,5 +1,4 @@
 from flask import Flask, request, Response, make_response
-import threading
 import sys
 sys.path.append("scripts/")
 sys.path.append("configs/")
@@ -24,9 +23,8 @@ def hello():
 
 @app.route('/start')
 def sendKafkaMetrics():
-    t = threading.Thread(target=analyticsHelpers.startProcess)
-    t.start()
-    return 'Script started'
+    result = analyticsHelpers.startProcess()
+    return result
     
 @app.route('/logs')
 def getLogs():
