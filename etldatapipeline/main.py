@@ -1,12 +1,11 @@
 from flask import Flask, request, Response, make_response
-import threading
 import sys
 sys.path.append("scripts/")
 sys.path.append("configs/")
 sys.path.append("logs/")
 sys.path.append("reports/")
 
-from scripts import startHelpers
+from scripts import analyticsHelpers
 from scripts import logsHelpers
 import datetime
 
@@ -16,15 +15,16 @@ now_str = now.strftime('%d_%m_%Y')
 
 app = Flask(__name__)
 
+analyticsHelpers.startProcess()
+
 @app.route('/')
 def hello():
     return 'Hello from Etl data pipeline'
 
 @app.route('/start')
 def sendKafkaMetrics():
-    t = threading.Thread(target=startHelpers.startProcess)
-    t.start()
-    return 'Script started'
+    result = analyticsHelpers.startProcess()
+    return result
     
 @app.route('/logs')
 def getLogs():

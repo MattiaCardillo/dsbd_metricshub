@@ -72,8 +72,14 @@ def getCustomMetricsRangeByHour(hour, prom, prom_config, metricName):
 
     return newMetricsArray
 
-def getCustomMetricListRangeByHour(hour, prom, prom_config, metricName):
-    query='{__name__=~"'+metricName+'",job="'+prom_config.label_config['job']+'"}['+str(hour)+'h]'
+def getCustomMetricListRangeByHour(hour, prom, label_config, metricName):
+    query='{__name__=~"'+metricName+'",job="'+label_config['job']+'"}['+str(hour)+'h]'
     metricList = prom.custom_query(query)
+
+    return metricList
+
+def getCustomMetricListFromQuery(hour, prom, query):
+    q=query+'['+str(hour)+'h]'
+    metricList = prom.custom_query(q)
 
     return metricList

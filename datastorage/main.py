@@ -1,6 +1,5 @@
 # compose_flask/app.py
 from flask import Flask
-import threading
 import sys
 sys.path.append("scripts/")
 sys.path.append("configs/")
@@ -13,15 +12,7 @@ load_dotenv()
 app = Flask(__name__)
 startDb()
 
-@app.route('/')
-def hello():
-    return 'Hello from Data storage'
-
-@app.route('/start')
-def kafkaStart():
-    t = threading.Thread(target=startHelpers.startProcess)
-    t.start()
-    return 'Script started'
+startHelpers.startProcess()
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001)
