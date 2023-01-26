@@ -25,7 +25,7 @@ Una serie si dice "stagionale", se presenta pattern comportamentali che si ripre
     -period = "100" ecc
     -Devo fare in modo che, guardando questi parametri il mio risultato finale abbia un residuo simile a rumore bianco
     (attorno allo zero)
-    -Il trend inoltre non deve essere una funzione stagionale
+    -Il trend inoltre non deve essere una funzione stagionale OK!
 
 Autocorrelazione:
 Una serie è autocorrelata quando c'è una correlazione dal campione k al k-1 per ogni kesimo elemento della serie

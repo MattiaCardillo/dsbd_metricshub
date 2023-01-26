@@ -6,7 +6,7 @@ sys.path.append("configs/")
 sys.path.append("logs/")
 sys.path.append("reports/")
 
-from scripts import startHelpers
+from scripts import analyticsHelpers
 from scripts import logsHelpers
 import datetime
 
@@ -16,7 +16,7 @@ now_str = now.strftime('%d_%m_%Y')
 
 app = Flask(__name__)
 
-startHelpers.startProcess()
+analyticsHelpers.startProcess()
 
 @app.route('/')
 def hello():
@@ -24,7 +24,7 @@ def hello():
 
 @app.route('/start')
 def sendKafkaMetrics():
-    t = threading.Thread(target=startHelpers.startProcess)
+    t = threading.Thread(target=analyticsHelpers.startProcess)
     t.start()
     return 'Script started'
     

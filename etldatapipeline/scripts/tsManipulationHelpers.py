@@ -56,18 +56,38 @@ def stationarityTest(ts):
     return testResult
 
 
-def seasonabilityTest(ts):
+def seasonabilityTest(ts, selectedMetric):
 
     try:
         ts = ts.rolling(window=60).mean()
         ts = ts.bfill()
         # Esegue la decomposizione stagionale della serie
-        result = seasonal_decompose(ts['value'],model='additive', period=100)
+        result = seasonal_decompose(ts['value'],model=selectedMetric['params']['model'], period=selectedMetric['params']['period'])
 
         # Stampa i componenti della decomposizione
-        print("Trend:", result.trend)
-        print("Stagionale:", result.seasonal)
-        print("Residui:", result.resid)
+        # print("Trend:", result.trend)
+        # print("Stagionale:", result.seasonal)
+        # print("Residui:", result.resid)
+
+        # Crea il grafico
+        plt.plot(result.trend)
+
+        # Aggiungi un titolo al grafico
+        plt.title('Trend della serie temporale')
+
+        filename='tmp/trend'+selectedMetric['name']+'.png'
+        plt.savefig(filename)
+        plt.close()
+
+        # Crea il grafico
+        plt.plot(result.resid)
+
+        # Aggiungi un titolo al grafico
+        plt.title('Resuidi della serie temporale')
+
+        filename='tmp/residui'+selectedMetric['name']+'.png'
+        plt.savefig(filename)
+        plt.close()
 
         # Crea il grafico
         plt.plot(result.seasonal)
@@ -75,8 +95,10 @@ def seasonabilityTest(ts):
         # Aggiungi un titolo al grafico
         plt.title('Stagionalità della serie temporale')
 
-        filename='tmp/seasonability.png'
+        filename='tmp/seasonability'+selectedMetric['name']+'.png'
         plt.savefig(filename)
+        plt.close()
+        
     except Exception as e:
         print(e)
 
@@ -100,5 +122,5 @@ def autocorrelationTest(ts):
     filename='tmp/atf.png'
     # Mostra il grafico
     plt.savefig(filename)
-
+    
     return filename
