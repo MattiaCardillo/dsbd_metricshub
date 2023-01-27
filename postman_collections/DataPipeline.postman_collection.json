@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "898e7d59-ebc0-4e69-9545-bc9730d9d272",
+		"name": "DataPipeline",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15611257"
+	},
+	"item": [
+		{
+			"name": "Ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getLogs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/logs?date=05_01_2023",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"logs"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "05_01_2023"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"start"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -131,10 +131,9 @@ dmypy.json
 *.log
 !*example.log
 
-
 *.pdf
 !*example.pdf
 
 *.png
-
-/tmp
+!*example.png
+!*architecture.png

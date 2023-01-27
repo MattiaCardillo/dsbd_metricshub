@@ -49,10 +49,11 @@ def getCustomMetricsRangeByHour(hour, prom, prom_config, metricName):
     metricList = prom.custom_query(query)
 
     newMetricsArray = []
-    newMetricsFormat = {'metric': None, 'max': None, 'min': None, 'avg': None, 'std_dev': None}
+    newMetricsFormat = {'metric': None, 'max': None, 'min': None, 'avg': None, 'std_dev': None, 'other_details': None}
     for metricData in metricList:
         print('Running for {}'.format(metricData['metric']['__name__']))
-        
+        otherDetails = ', '.join([f"{key}:{value}" for key, value in metricData['metric'].items() if key != '__name__'])
+                
         metric_df = MetricRangeDataFrame(metricData)
         max= metric_df['value'].max()
         min= metric_df['value'].min()
@@ -63,7 +64,8 @@ def getCustomMetricsRangeByHour(hour, prom, prom_config, metricName):
         newMetricsFormat['max'] = max
         newMetricsFormat['min'] = min
         newMetricsFormat['avg'] = avg
-        newMetricsFormat['std_dev'] = std_dev   
+        newMetricsFormat['std_dev'] = std_dev
+        newMetricsFormat['other_details'] = otherDetails
         newMetricsArray.append(newMetricsFormat.copy())
 
     end_time = time.time()
