@@ -26,22 +26,22 @@ The application consists of three microservices: "ETL Data Pipeline", "Data Stor
     + docker-compose-up on "docker-compose.yml"
 4. Start the microservices:
     + Locally:
-        + ### ETL DATA PIPELINE:
+        + #### ETL DATA PIPELINE:
             + ```cd dsbd_metricshub/etldatapipeline``` 
             + ```python main.py``` 
-        + ### DATA STORAGE:
+        + #### DATA STORAGE:
             + ```cd dsbd_metricshub/datastorage``` 
             + ```python main.py```
-        + ### DATA RETRIEVAL:
+        + #### DATA RETRIEVAL:
             + ```cd dsbd_metricshub/dataretrieval``` 
             + ```python main.py```
     + Docker:
-        + ### ETL DATA PIPELINE:
+        + #### ETL DATA PIPELINE:
             + ```cd dsbd_metricshub/etldatapipeline``` 
             + docker-compose-up on "docker-compose.yml"
-        + ### DATA STORAGE:
+        + #### DATA STORAGE:
             + ```cd dsbd_metricshub/datastorage``` 
             + docker-compose-up on "docker-compose.yml"
-        + ### DATA RETRIEVAL:
+        + #### DATA RETRIEVAL:
             + ```cd dsbd_metricshub/dataretrieval``` 
             + docker-compose-up on "docker-compose.yml"
