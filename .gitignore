@@ -136,3 +136,4 @@ dmypy.json
 
 *.png
 !*example.png
+!*architecture.png
