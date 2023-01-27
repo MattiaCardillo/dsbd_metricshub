@@ -1,4 +1,5 @@
-from flask import Flask, request, Response, make_response
+from flask import Flask, request, Response, make_response, jsonify
+import base64
 import sys
 sys.path.append("scripts/")
 sys.path.append("configs/")
@@ -38,6 +39,19 @@ def getLogs():
         response.status_code = 404
         return response
     return Response(logs, mimetype='text/plain')
+
+@app.route('/reports/<name>')
+def get_file(name):
+    encoded_string = ""
+    try:
+        with open('reports/'+name+'.pdf', "rb") as pdf_file:
+            encoded_string = base64.b64encode(pdf_file.read())
+            encoded_string = encoded_string.decode('utf-8')
+            apistatus="OK"
+    except Exception as e:
+        apistatus="KO"
+
+    return jsonify(status=apistatus, encoded_pdf=encoded_string)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
