@@ -1,31 +1,15 @@
-Progetto prova in itinere DSBD aa2022-2023
+# MetricsHub
 
-Sia X una applicazione o un componente di una applicazione (K8s, docker, applicazione) che
-espone metriche attraverso un Prometheus exporter.
-L’exporter può essere già sviluppato o da sviluppare (per team composti da più studenti)
-Si configuri un server Prometheus per fare scraping delle metriche esposte dall’exporter.
+## Requisiti
+- Sistema operativo: Windows, MacOS o Linux
+- [Docker](https://nodejs.org) version 20 or higher
+- [Python] version 3.7 or higher
 
-ETL data pipeline -> si crei un microservizio che, per ogni metrica esposta:
-- calcoli un set di metadati con i relativi valori (autocorrelazione? stazionarietà?
-stagionalità?)
-- calcoli il valore di max, min, avg, dev_std della metriche per 1h,3h, 12h;
-- predica il valore di max, min, avg nei successivi 10 minuti per un set ristretto di 5
-metriche (SLA Set da SLA Manager)
-- Inoltri in un topic Kafka “promethuesdata” un messaggio contenente i valori
-calcolati.
-Si crei un sistema di monitoraggio interno che renda visibile (tramite REST, log o come
-exporter) il tempo necessario all’esecuzione delle varie funzionalità (quanto tempo serve a
-generare i dati delle 12 ore per una metrica?)
+## Abstract
+MetricsHub is an application that utilizes the microservices architecture to handle data retrieval, processing and storage. 
+The application consists of three microservices: "ETL Data Pipeline", "Data Storage", and "Data Retrieval". The ETL Data Pipeline microservice is responsible for collecting metrics from a Prometheus server and forwarding them to a Kafka server through a producer. Additionally, it exposes a RESTful interface for external clients to access reports and logs related to the processing of metrics. The Data Storage microservice communicates with the Kafka server through a consumer and performs queries on a MySql database using the data retrieved from Kafka. The Data Retrieval microservice retrieves data from the MySql database and exposes a RESTful interface for external clients to access the data. All microservices are running on Docker, allowing for easy deployment and scaling of the application. By separating the data processing and storage into distinct microservices, the application can handle high volumes of data while maintaining flexibility and scalability.
 
-Data Storage -> si crei un microservizio che avvii un consumer group del topic
-“promethuesdata” e, per ogni messaggio prelevato, memorizzi i valori calcolati in un DB a
-scelta.
-
-Data Retrieval -> si crei un microservizio che offre una interfaccia REST-o gRPC-based- che
-permetta di estrarre in modo strutturato le informazioni generate dall’applicazione ETL e contenute nel DB.
-Si rendano disponibili:
-- QUERY di tutte le metriche disponibili in Prometheus
-- Per ogni metrica
-o QUERY dei metadati.
-o QUERY dei valori max, min, avg,dev_std per le ultime 1,3,12 ore.
-o QUERY dei valori predetti
+## Installation Commands
+1. Clone the repository;
+2. Install the dependencies:
+2.1. python prova
