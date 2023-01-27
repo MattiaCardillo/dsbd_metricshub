@@ -46,6 +46,7 @@ The application consists of three microservices: "ETL Data Pipeline", "Data Stor
         + #### DATA RETRIEVAL:
             + ```cd dsbd_metricshub/dataretrieval``` 
             + docker-compose-up on "docker-compose.yml"
+5. Start using microservice with an http client (You can find a postman collections in "postman_collections" folder)
 
 ## Microservices Architecture
 
