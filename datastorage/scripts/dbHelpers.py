@@ -2,9 +2,9 @@ import mysql.connector
 import os
 
 queries = {
-    "insertMetric1h": "INSERT INTO metrics1h (metric, max, min, avg, std_dev) VALUES (%s, %s, %s, %s, %s)",
-    "insertMetric3h": "INSERT INTO metrics3h (metric, max, min, avg, std_dev) VALUES (%s, %s, %s, %s, %s)",
-    "insertMetric12h": "INSERT INTO metrics12h (metric, max, min, avg, std_dev) VALUES (%s, %s, %s, %s, %s)",
+    "insertMetric1h": "INSERT INTO metrics1h (metric, max, min, avg, std_dev, other_details) VALUES (%s, %s, %s, %s, %s, %s)",
+    "insertMetric3h": "INSERT INTO metrics3h (metric, max, min, avg, std_dev, other_details) VALUES (%s, %s, %s, %s, %s, %s)",
+    "insertMetric12h": "INSERT INTO metrics12h (metric, max, min, avg, std_dev, other_details) VALUES (%s, %s, %s, %s, %s, %s)",
     "getMetrics": "SELECT * from metrics"
 }
 
