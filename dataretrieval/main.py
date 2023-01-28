@@ -20,19 +20,21 @@ def hello():
 
 @app.route('/listmetrics')
 def getNames():
-    result = dbHelpers.makeQuery(dbHelpers.queries['createView'], None)
+    dbHelpers.makeQuery(dbHelpers.queries['createView'], None)
     result = dbHelpers.makeQuery(dbHelpers.queries['listAllNames'], None)
     return result
 
 @app.route('/metrics')
 def getMetrics():
-    type = request.args.get("type")
+    type = request.args.get("filter")
     result = dbHelpers.makeQuery(dbHelpers.queries['createView'], None)
     if type:
         if type in dbpref.supportedTypes:
             result = dbHelpers.makeQuery(dbHelpers.queries['getMetricsFromTable'+type], None)
+            return result
         else:
             return "Error, this type is not supported"
+            return result
 
     result = dbHelpers.makeQuery(dbHelpers.queries['getMetrics'], None)
     return result
