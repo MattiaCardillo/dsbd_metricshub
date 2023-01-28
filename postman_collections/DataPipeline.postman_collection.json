@@ -51,9 +51,29 @@
 			"response": []
 		},
 		{
-			"name": "Start",
+			"name": "Reports",
 			"request": {
 				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/reports/pushgateway_http_push_duration_seconds",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"reports",
+						"pushgateway_http_push_duration_seconds"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Restart",
+			"request": {
+				"method": "POST",
 				"header": [],
 				"url": {
 					"raw": "http://localhost:5000/start",

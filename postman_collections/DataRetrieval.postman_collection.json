@@ -70,7 +70,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5002/metrics?filter=3h",
+					"raw": "http://localhost:5002/metrics?filter=1h",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -82,7 +82,7 @@
 					"query": [
 						{
 							"key": "filter",
-							"value": "3h"
+							"value": "1h"
 						}
 					]
 				}
