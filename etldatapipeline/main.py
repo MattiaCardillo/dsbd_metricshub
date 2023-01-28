@@ -22,7 +22,7 @@ analyticsHelpers.startProcess()
 def hello():
     return 'Hello from Etl data pipeline'
 
-@app.route('/start')
+@app.route('/start', methods=['POST'])
 def sendKafkaMetrics():
     result = analyticsHelpers.startProcess()
     return result
