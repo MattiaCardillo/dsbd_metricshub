@@ -50,3 +50,7 @@ MetricsHub is an application that utilizes the microservices architecture to han
 ## Microservices Architecture
 
 ![Architecture](/architecture.png)
+
+## More
+
+A detailed tecnical report can be found in /docs.
