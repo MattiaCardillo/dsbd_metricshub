@@ -133,6 +133,7 @@ dmypy.json
 
 *.pdf
 !*example.pdf
+!technical_report.pdf
 
 *.png
 !*example.png
